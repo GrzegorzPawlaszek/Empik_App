@@ -22,8 +22,11 @@ public class GitService {
     @Value("${connect.timeout}")
     private int connectTimeout;
 
-    @Autowired
-    private WebClient.Builder webClientBuilder;
+    private final WebClient.Builder webClientBuilder;
+
+    public GitService(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
+    }
 
     public GitUser getUserByLogin(String userLogin){
 

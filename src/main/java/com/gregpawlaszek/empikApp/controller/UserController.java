@@ -22,14 +22,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class UserController {
 
-    @Autowired
-    private GitService gitService;
-
-    @Autowired
+    private final GitService gitService;
+    
     private RequestCounterService requestCounterService;
 
-    @Autowired
     private CalculationService calculationService;
+
+    public UserController(GitService gitService) {
+        this.gitService = gitService;
+    }
 
     @GetMapping("/{userLogin}")
     public ResponseEntity<User> getUser(@PathVariable("userLogin") final String userLogin){
@@ -75,5 +76,15 @@ public class UserController {
     public long getCount(@PathVariable("userLogin") final String userLogin){
         ApiRequest apiRequest = requestCounterService.findRequestByLogin(userLogin);
             return apiRequest.getRequestCount();
+    }
+
+    @Autowired
+    public void setRequestCounterService(RequestCounterService requestCounterService){
+        this.requestCounterService = requestCounterService;
+    }
+
+    @Autowired
+    public void setCalculationService(CalculationService calculationService) {
+        this.calculationService = calculationService;
     }
 }

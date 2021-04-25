@@ -2,7 +2,6 @@ package com.gregpawlaszek.empikApp.service.calculation;
 
 import com.gregpawlaszek.empikApp.dto.CalculationRequest;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
