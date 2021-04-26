@@ -1,4 +1,4 @@
-package com.gregpawlaszek.empikApp.entity;
+package com.gregpawlaszek.empikapp.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

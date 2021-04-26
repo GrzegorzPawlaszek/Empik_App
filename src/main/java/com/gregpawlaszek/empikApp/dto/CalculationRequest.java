@@ -1,13 +1,10 @@
-package com.gregpawlaszek.empikApp.dto;
+package com.gregpawlaszek.empikapp.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Builder
 public class CalculationRequest {
 

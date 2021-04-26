@@ -1,9 +1,8 @@
-package com.gregpawlaszek.empikApp.service.calculation;
+package com.gregpawlaszek.empikapp.service.calculation;
 
-import com.gregpawlaszek.empikApp.dto.CalculationRequest;
+import com.gregpawlaszek.empikapp.dto.CalculationRequest;
 
 public interface CalculationService {
-
 
     int countReposFactor(CalculationRequest calculationRequest);
     double countFollowersFactor(CalculationRequest calculationRequest);

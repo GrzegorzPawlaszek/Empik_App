@@ -1,18 +1,15 @@
-package com.gregpawlaszek.empikApp.service.calculation;
+package com.gregpawlaszek.empikapp.service.calculation;
 
-import com.gregpawlaszek.empikApp.config.CalculationConfig;
-import com.gregpawlaszek.empikApp.dto.CalculationRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.gregpawlaszek.empikapp.config.CalculationConfig;
+import com.gregpawlaszek.empikapp.dto.CalculationRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class CalculationServiceImpl implements CalculationService{
 
     private final CalculationConfig calculationConfig;
-
-    public CalculationServiceImpl(CalculationConfig calculationConfig){
-        this.calculationConfig = calculationConfig;
-    }
 
     public int countReposFactor(CalculationRequest calculationRequest) {
         int publicReposCount = calculationRequest.getPublicReposCount();

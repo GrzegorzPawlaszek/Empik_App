@@ -1,4 +1,4 @@
-package com.gregpawlaszek.empikApp.exception;
+package com.gregpawlaszek.empikapp.exception;
 
 public class UserNotFoundException extends RuntimeException{
     public UserNotFoundException(String userLogin){

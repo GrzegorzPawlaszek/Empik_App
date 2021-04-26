@@ -1,7 +1,7 @@
-package com.gregpawlaszek.empikApp.service.requestCounter;
+package com.gregpawlaszek.empikapp.service.requestcounter;
 
-import com.gregpawlaszek.empikApp.entity.ApiRequest;
-import com.gregpawlaszek.empikApp.repository.GitRequestRepository;
+import com.gregpawlaszek.empikapp.entity.ApiRequest;
+import com.gregpawlaszek.empikapp.repository.GitRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

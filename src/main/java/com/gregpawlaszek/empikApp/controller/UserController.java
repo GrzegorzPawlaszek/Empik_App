@@ -1,15 +1,14 @@
-package com.gregpawlaszek.empikApp.controller;
+package com.gregpawlaszek.empikapp.controller;
 
-import com.gregpawlaszek.empikApp.entity.ApiRequest;
-import com.gregpawlaszek.empikApp.dto.CalculationRequest;
-import com.gregpawlaszek.empikApp.dto.GitUser;
-import com.gregpawlaszek.empikApp.dto.User;
-import com.gregpawlaszek.empikApp.exception.UserLoginArgumentException;
-import com.gregpawlaszek.empikApp.service.git.GitService;
-import com.gregpawlaszek.empikApp.service.calculation.CalculationService;
-import com.gregpawlaszek.empikApp.service.requestCounter.RequestCounterService;
+import com.gregpawlaszek.empikapp.entity.ApiRequest;
+import com.gregpawlaszek.empikapp.dto.GitUser;
+import com.gregpawlaszek.empikapp.dto.User;
+import com.gregpawlaszek.empikapp.exception.UserLoginArgumentException;
+import com.gregpawlaszek.empikapp.service.git.GitService;
+import com.gregpawlaszek.empikapp.service.requestcounter.RequestCounterService;
+import com.gregpawlaszek.empikapp.service.user.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,18 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 @Slf4j
 public class UserController {
 
     private final GitService gitService;
-    
-    private RequestCounterService requestCounterService;
-
-    private CalculationService calculationService;
-
-    public UserController(GitService gitService) {
-        this.gitService = gitService;
-    }
+    private final RequestCounterService requestCounterService;
+    private final UserService userService;
 
     @GetMapping("/{userLogin}")
     public ResponseEntity<User> getUser(@PathVariable("userLogin") final String userLogin){
@@ -38,53 +32,18 @@ public class UserController {
             throw new UserLoginArgumentException();
 
         log.info("Request for user: {}", userLogin);
-
-        GitUser gitUser = gitService.getUserByLogin(userLogin);
         requestCounterService.incrementCount(userLogin);
 
-        User reponseUser = createResponseUser(gitUser);
-        return ResponseEntity.ok(reponseUser);
-    }
+        GitUser gitUser = gitService.getUserByLogin(userLogin);
 
-    private User createResponseUser(GitUser gitUser) {
-        double calculation = getCalculation(gitUser);
-        return new User(
-                gitUser.getId(),
-                gitUser.getLogin(),
-                gitUser.getName(),
-                gitUser.getType(),
-                gitUser.getAvatar_url(),
-                gitUser.getCreated_at(),
-                calculation
-        );
-    }
-
-    private double getCalculation(GitUser gitUser) {
-        CalculationRequest calcRequest = createCalcRequest(gitUser);
-
-        return calculationService.getCalculation(calcRequest);
-    }
-
-    private CalculationRequest createCalcRequest(GitUser gitUser) {
-        return CalculationRequest.builder()
-                .followersCount(gitUser.getFollowers())
-                .publicReposCount(gitUser.getPublic_repos())
-                .build();
+        User responseUser = userService.createResponseUser(gitUser);
+        return ResponseEntity.ok(responseUser);
     }
 
     @GetMapping("/count/{userLogin}")
-    public long getCount(@PathVariable("userLogin") final String userLogin){
+    public ResponseEntity<ApiRequest> getCount(@PathVariable("userLogin") final String userLogin){
         ApiRequest apiRequest = requestCounterService.findRequestByLogin(userLogin);
-            return apiRequest.getRequestCount();
+            return ResponseEntity.ok(apiRequest);
     }
 
-    @Autowired
-    public void setRequestCounterService(RequestCounterService requestCounterService){
-        this.requestCounterService = requestCounterService;
-    }
-
-    @Autowired
-    public void setCalculationService(CalculationService calculationService) {
-        this.calculationService = calculationService;
-    }
 }

@@ -1,6 +1,6 @@
-package com.gregpawlaszek.empikApp.service.calculation;
+package com.gregpawlaszek.empikapp.service.calculation;
 
-import com.gregpawlaszek.empikApp.dto.CalculationRequest;
+import com.gregpawlaszek.empikapp.dto.CalculationRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

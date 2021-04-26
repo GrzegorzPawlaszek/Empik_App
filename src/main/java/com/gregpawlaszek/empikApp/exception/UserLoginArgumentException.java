@@ -1,4 +1,4 @@
-package com.gregpawlaszek.empikApp.exception;
+package com.gregpawlaszek.empikapp.exception;
 
 public class UserLoginArgumentException extends RuntimeException{
     public UserLoginArgumentException() {

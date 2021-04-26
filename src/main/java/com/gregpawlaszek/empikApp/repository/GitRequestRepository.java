@@ -1,6 +1,6 @@
-package com.gregpawlaszek.empikApp.repository;
+package com.gregpawlaszek.empikapp.repository;
 
-import com.gregpawlaszek.empikApp.entity.ApiRequest;
+import com.gregpawlaszek.empikapp.entity.ApiRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

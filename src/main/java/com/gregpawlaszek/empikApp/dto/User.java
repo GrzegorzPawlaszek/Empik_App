@@ -1,4 +1,4 @@
-package com.gregpawlaszek.empikApp.dto;
+package com.gregpawlaszek.empikapp.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

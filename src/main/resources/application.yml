@@ -4,19 +4,13 @@ server:
     include-message: always
 github:
   url: "https://api.github.com/users/{userLogin}"
-connect:
-  timeout: 3000
+webclient:
+  connect:
+    timeout: 3000
+    reply: 4
 
 calculation:
   followers:
     nominator: 6
   repos:
     incrementor: 2
-
-#hystrix:
-#  command:
-#    fallbackcmd:
-#      execution:
-#        isolation:
-#          thread:
-#            timeoutInMilliseconds: 4000
